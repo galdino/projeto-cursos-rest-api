@@ -24,7 +24,9 @@ public class CursoServiceImpl implements CursoService {
 
 	@Override
 	public void update(Long id, Curso curso) {
-		Curso cursoAux = this.findById(id);
+		curso.setId(id);
+		
+		Curso cursoAux = this.findById(curso.getId());
 		cursoAux.setTitulo(curso.getTitulo());
 		cursoAux.setCargaHoraria(curso.getCargaHoraria());
 		cursoAux.setDataInicio(curso.getDataInicio());
