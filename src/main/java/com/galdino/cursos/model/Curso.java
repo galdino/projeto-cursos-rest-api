@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "cursos", indexes = {
 		@Index(columnList = "titulo, data_inicio", unique = true, name = "unique_titulo_dataInicio")
@@ -30,6 +32,7 @@ public class Curso implements Serializable {
 	@Column(name = "carga_horaria", nullable = false)
 	private CargaHoraria cargaHoraria;
 
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "data_inicio")
 	private Date dataInicio;
 

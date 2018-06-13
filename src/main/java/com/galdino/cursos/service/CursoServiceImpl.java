@@ -48,12 +48,18 @@ public class CursoServiceImpl implements CursoService {
 	public List<Curso> findAll() {
 		return cursoRepository.findAll();
 	}
-
+	
 	@Override
 	public Curso updateDataInicio(Long id, Date dataInicio) {
 		Curso curso = this.findById(id);
 		curso.setDataInicio(dataInicio);
 		return curso;
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public List<Curso> filtrarPorPeriodoDataInicio(Date dataInicial, Date dataFinal) {
+		return cursoRepository.filtrarPorPeriodoDataInicio(dataInicial, dataFinal);
 	}
 
 }
