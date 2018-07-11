@@ -2,13 +2,16 @@ package com.galdino.cursos.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -35,6 +38,9 @@ public class Curso implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "data_inicio")
 	private Date dataInicio;
+	
+	@OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
+	private List<VideoAula> videoAulas;
 
 	public Long getId() {
 		return id;
@@ -66,6 +72,14 @@ public class Curso implements Serializable {
 
 	public void setDataInicio(Date dataInicio) {
 		this.dataInicio = dataInicio;
+	}
+
+	public List<VideoAula> getVideoAulas() {
+		return videoAulas;
+	}
+
+	public void setVideoAulas(List<VideoAula> videoAulas) {
+		this.videoAulas = videoAulas;
 	}
 
 }
