@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "cursos", indexes = {
@@ -39,6 +40,7 @@ public class Curso implements Serializable {
 	@Column(name = "data_inicio")
 	private Date dataInicio;
 	
+	@JsonIgnoreProperties("curso")
 	@OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
 	private List<VideoAula> videoAulas;
 
