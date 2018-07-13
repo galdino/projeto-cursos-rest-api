@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.galdino.cursos.exception.IdNaoValidoServiceException;
 import com.galdino.cursos.exception.NaoExisteDaoException;
 import com.galdino.cursos.model.Curso;
+import com.galdino.cursos.model.VideoAula;
 import com.galdino.cursos.repository.CursoRepository;
 
 @Service
@@ -26,6 +27,11 @@ public class CursoServiceImpl implements CursoService {
 	public void save(Curso curso) {
 		try {
 			cursoRepository.save(curso);
+			if(curso.getVideoAulas() != null && curso.getVideoAulas().size() > 0) {
+				for (VideoAula videoAula : curso.getVideoAulas()) {
+					videoAula.setCurso(curso);
+				}
+			}
 		} catch (DataIntegrityViolationException e) {
 			if(e.getMostSpecificCause().getMessage().toUpperCase().contains("UNIQUE_TITULO_DATAINICIO")) {
 				throw new ConstraintViolationException(e.getMessage(), null, "unique_titulo_dataInicio");
