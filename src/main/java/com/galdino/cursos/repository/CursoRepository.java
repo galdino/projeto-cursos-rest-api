@@ -14,5 +14,8 @@ public interface CursoRepository extends JpaRepository<Curso, Long> {
 	@Query("SELECT c FROM Curso c WHERE c.dataInicio BETWEEN :dataInicial AND :dataFinal")
 	List<Curso> filtrarPorPeriodoDataInicio(@Param("dataInicial") Date dataInicial, 
 											@Param("dataFinal") Date dataFinal);
+	
+	@Query("SELECT new Curso(c.id, c.titulo, c.cargaHoraria, c.dataInicio) FROM Curso c")
+	List<Curso> findAllSemVideoAulas();
 
 }

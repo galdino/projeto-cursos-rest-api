@@ -20,5 +20,7 @@ public interface CursoService {
 	Curso updateDataInicio(Long id, Date dataInicio);
 
 	List<Curso> filtrarPorPeriodoDataInicio(Date dataInicial, Date dataFinal);
+	
+	List<Curso> findAllSemVideoAulas();
 
 }

@@ -100,4 +100,10 @@ public class CursoServiceImpl implements CursoService {
 		
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Curso> findAllSemVideoAulas() {
+		return cursoRepository.findAllSemVideoAulas();
+	}
+
 }
