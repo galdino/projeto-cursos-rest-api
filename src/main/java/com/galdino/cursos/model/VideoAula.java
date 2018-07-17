@@ -33,6 +33,17 @@ public class VideoAula implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_curso_fk")
 	private Curso curso;
+	
+	public VideoAula() {
+		super();
+	}
+	
+	public VideoAula(Long id, String titulo, String descricao, Integer numero) {
+		this.id = id;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.numero = numero;
+	}
 
 	public Long getId() {
 		return id;
