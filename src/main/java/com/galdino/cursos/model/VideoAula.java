@@ -11,6 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 @Entity
 @Table(name = "videoaulas")
 public class VideoAula implements Serializable {
@@ -30,6 +34,8 @@ public class VideoAula implements Serializable {
 	@Column(nullable = false)
 	private Integer numero;
 
+	@JsonInclude(value = Include.NON_NULL)
+	@JsonIgnoreProperties("videoAulas")
 	@ManyToOne
 	@JoinColumn(name = "id_curso_fk")
 	private Curso curso;
