@@ -15,9 +15,15 @@ public class VideoAulaServiceImpl implements VideoAulaService {
 
 	@Autowired
 	private VideoAulaRepository videoAulaRepository;
+	
+	@Autowired
+	private CursoService cursoService;
 
 	@Override
 	public void save(Long idCurso, VideoAula videoAula) {
+		if(videoAula.getCurso() == null) {
+			videoAula.setCurso(cursoService.findById(idCurso));
+		}
 		videoAulaRepository.save(videoAula);
 	}
 
@@ -26,11 +32,14 @@ public class VideoAulaServiceImpl implements VideoAulaService {
 		videoAula.setId(idVideoAula);
 
 		VideoAula videoAulaAux = this.findByIdVideoAulaAndIdCurso(videoAula.getId(), idCurso);
-		videoAulaAux.setTitulo(videoAula.getTitulo());
-		videoAulaAux.setDescricao(videoAula.getDescricao());
-		videoAulaAux.setNumero(videoAula.getNumero());
-
-		this.save(videoAulaAux.getCurso().getId(), videoAulaAux);
+		
+		if(videoAulaAux != null) {
+			videoAulaAux.setTitulo(videoAula.getTitulo());
+			videoAulaAux.setDescricao(videoAula.getDescricao());
+			videoAulaAux.setNumero(videoAula.getNumero());
+			
+			this.save(videoAulaAux.getCurso().getId(), videoAulaAux);
+		}
 	}
 
 	@Override
