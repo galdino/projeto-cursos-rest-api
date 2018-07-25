@@ -91,7 +91,7 @@ public class CursoServiceImpl implements CursoService {
 		return cursoRepository.filtrarPorPeriodoDataInicio(dataInicial, dataFinal);
 	}
 	
-	private Long idValido(Long id) {
+	public Long idValido(Long id) {
 		if(id <= 0) {
 			throw new IdNaoValidoServiceException("Valor do campo id está inválido. Deve ser um valor inteiro maior que zero.");
 		}

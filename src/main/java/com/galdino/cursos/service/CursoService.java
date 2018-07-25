@@ -23,4 +23,6 @@ public interface CursoService {
 	
 	List<Curso> findAllSemVideoAulas();
 
+	Long idValido(Long id);
+
 }

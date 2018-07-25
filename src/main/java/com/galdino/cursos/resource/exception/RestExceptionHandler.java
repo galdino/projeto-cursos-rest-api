@@ -3,6 +3,7 @@ package com.galdino.cursos.resource.exception;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -15,6 +16,20 @@ import com.galdino.cursos.model.DetalheErro;
 
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+	
+	@Override
+	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+		return handleExceptionInternal(ex, 
+				DetalheErro.builder()
+					.addDetalhe("A requisição possui valores inválidos, vazios ou nulos.")
+					.addErro(ex.getMessage())
+					.addStatus(HttpStatus.BAD_REQUEST)
+					.addHttpMethod(getHttpMethod(request))
+					.addPath(getPath(request))
+					.build(), 
+				new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+	}
 	
 	@ExceptionHandler({IdNaoValidoServiceException.class})
 	public ResponseEntity<Object> idInvalido(IdNaoValidoServiceException ex, WebRequest request) {
