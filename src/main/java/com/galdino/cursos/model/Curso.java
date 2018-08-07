@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
-@Table(name = "cursos", indexes = {
+@Table(name = "t_cursos", indexes = {
 		@Index(columnList = "titulo, data_inicio", unique = true, name = "unique_titulo_dataInicio")
 
 })

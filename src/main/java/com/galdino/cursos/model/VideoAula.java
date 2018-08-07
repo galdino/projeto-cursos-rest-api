@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
-@Table(name = "videoaulas")
+@Table(name = "t_videoaulas")
 public class VideoAula implements Serializable {
 
 	private static final long serialVersionUID = 1813676955917876549L;
